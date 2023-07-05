@@ -2,5 +2,5 @@
 
 public class ProductType : BaseEntity
 {
-    private String Name { get; set; }
+    public string Name { get; set; }
 }

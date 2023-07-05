@@ -19,6 +19,13 @@ namespace Infrastructure.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Configure your database provider and connection string here
+            optionsBuilder
+                .EnableSensitiveDataLogging(); // Enable sensitive data logging
+        }
     }
     
 }
