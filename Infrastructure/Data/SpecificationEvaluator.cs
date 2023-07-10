@@ -16,6 +16,5 @@ public class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
 
         query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
         return query;
-
     }
 }
