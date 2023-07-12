@@ -18,6 +18,20 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            
+            if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+            {
+                foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+                {
+                    var properties = entityType.ClrType.GetProperties()
+                        .Where(p => p.PropertyType == typeof(decimal));
+                    foreach (var property in properties)
+                    {
+                        modelBuilder.Entity(entityType.Name).Property(property.Name)
+                            .HasConversion<double>();
+                    }
+                }
+            }
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -25,6 +39,8 @@ namespace Infrastructure.Data
             // Configure your database provider and connection string here
             optionsBuilder
                 .EnableSensitiveDataLogging(); // Enable sensitive data logging
+
+            
         }
     }
     
