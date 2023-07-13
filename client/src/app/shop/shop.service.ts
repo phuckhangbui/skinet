@@ -31,6 +31,10 @@ export class ShopService {
     });
   }
 
+  getProduct(id: number) {
+    return this.http.get<Product>(this.baseUrl + 'products/' + id);
+  }
+
   getBrands() {
     return this.http.get<Brand[]>(this.baseUrl + 'products/brands');
   }
