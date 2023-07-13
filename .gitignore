@@ -483,3 +483,5 @@ API/appsettings.json
 
 ### Rider ###
 .idea/*
+API/skinet.db-shm
+API/skinet.db-wal
