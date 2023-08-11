@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Interfaces;
 using StackExchange.Redis;
+using System.Text.Json;
 
 namespace Infrastructure.Data;
 

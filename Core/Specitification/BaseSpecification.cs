@@ -4,7 +4,7 @@ namespace Core.Specitification;
 
 public class BaseSpecification<T> : ISpecification<T>
 {
-    
+
     public BaseSpecification()
     {
     }
@@ -15,7 +15,7 @@ public class BaseSpecification<T> : ISpecification<T>
 
 
     public Expression<Func<T, bool>> Criteria { get; }
-    public List<Expression<Func<T, object>>> Includes { get; } 
+    public List<Expression<Func<T, object>>> Includes { get; }
         = new List<Expression<Func<T, object>>>();
 
     public Expression<Func<T, object>> OrderBy { get; private set; }
@@ -33,7 +33,7 @@ public class BaseSpecification<T> : ISpecification<T>
     {
         OrderBy = orderByExpression;
     }
-    
+
     protected void AddOrderByDescending(Expression<Func<T, object>> orderByDecsExpression)
     {
         OrderByDescending = orderByDecsExpression;

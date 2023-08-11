@@ -1,12 +1,12 @@
-﻿using System.Reflection;
-using Core.Entities;
+﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Infrastructure.Data
 {
     public class StoreContext : DbContext
     {
-        public StoreContext(DbContextOptions options) : base(options)
+        public StoreContext(DbContextOptions<StoreContext> options) : base(options)
         {
         }
 
@@ -18,7 +18,7 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            
+
             if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
             {
                 foreach (var entityType in modelBuilder.Model.GetEntityTypes())
@@ -33,15 +33,15 @@ namespace Infrastructure.Data
                 }
             }
         }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Configure your database provider and connection string here
             optionsBuilder
                 .EnableSensitiveDataLogging(); // Enable sensitive data logging
 
-            
+
         }
     }
-    
+
 }

@@ -1,11 +1,10 @@
 ﻿using API.Errors;
 using Infrastructure.Data;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-public class BuggyController: BaseApiController
+public class BuggyController : BaseApiController
 {
     private readonly StoreContext _context;
 
@@ -24,21 +23,22 @@ public class BuggyController: BaseApiController
         }
         return Ok();
     }
-    
+
     [HttpGet("servererror")]
     public ActionResult GetServerRequest()
     {
         var thing = _context.Products.Find(42);
         var thingToReturn = thing.ToString();
-        
+
         return Ok();
     }
-    
-    [HttpGet("badrequest")] public ActionResult GetBadRequest()
+
+    [HttpGet("badrequest")]
+    public ActionResult GetBadRequest()
     {
         return BadRequest(new ApiResponse(400));
     }
-    
+
     [HttpGet("badrequest/{id}")]
     public ActionResult GetBadRequest(int id)
     {

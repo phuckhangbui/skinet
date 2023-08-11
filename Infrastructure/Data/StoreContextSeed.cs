@@ -1,5 +1,5 @@
-﻿using System.Text.Json;
-using Core.Entities;
+﻿using Core.Entities;
+using System.Text.Json;
 
 namespace Infrastructure.Data;
 
@@ -13,13 +13,13 @@ public class StoreContextSeed
             var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
             context.ProductBrands.AddRange(brands); // no need to use async because this only tracking in memory
         }
-        
+
         if (!context.ProductTypes.Any())
         {
             var typesData = File.ReadAllText("../Infrastructure/Data/SeedData/types.json");
             var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
             context.ProductTypes.AddRange(types); // no need to use async because this only tracking in memory
-        } 
+        }
         if (!context.Products.Any())
         {
             var productsData = File.ReadAllText("../Infrastructure/Data/SeedData/products.json");

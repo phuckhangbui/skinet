@@ -7,7 +7,7 @@ using StackExchange.Redis;
 
 namespace API.Extensions;
 
-public static class ApplicationServicesExtensions 
+public static class ApplicationServicesExtensions
 {
     public static IServiceCollection ApplicationServices(this IServiceCollection services
         , IConfiguration config)
@@ -53,7 +53,7 @@ public static class ApplicationServicesExtensions
                 policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
             });
         });
-        
+
         return services;
     }
 }

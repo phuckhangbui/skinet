@@ -1,14 +1,13 @@
-﻿using System.Linq.Expressions;
-using Core.Entities;
+﻿using Core.Entities;
 
 namespace Core.Specitification;
 
 public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product>
 {
     public ProductsWithTypesAndBrandsSpecification(ProductSpecParams productParams)
-    :base(x =>
+    : base(x =>
         (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search))
-        && (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) 
+        && (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId)
         && (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
         )
     {
@@ -27,13 +26,14 @@ public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product
                 case "priceDesc":
                     AddOrderByDescending(x => x.Price);
                     break;
-                default: AddOrderBy(x => x.Name);
+                default:
+                    AddOrderBy(x => x.Name);
                     break;
             }
         }
     }
 
-    public ProductsWithTypesAndBrandsSpecification(int id) 
+    public ProductsWithTypesAndBrandsSpecification(int id)
         : base(x => x.Id == id)
     {
         AddInclude(x => x.ProductType);

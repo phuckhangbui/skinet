@@ -1,6 +1,4 @@
-﻿using API.Dtos;
-
-namespace API.Helpers;
+﻿namespace API.Helpers;
 
 public class Pagination<T> where T : class
 {

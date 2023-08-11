@@ -5,9 +5,7 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specitification;
-using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -38,7 +36,7 @@ namespace API.Controllers
             var totalItems = await _productsRepo.CountAsync(countSpec);
             var products = await _productsRepo.ListAsync(spec);
             var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
-            
+
             return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
@@ -46,7 +44,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
 
-        public async Task<ActionResult<ProductToReturnDto>>GetProduct(int id)
+        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product = await _productsRepo.GetEntityWithSpec(spec);
@@ -54,7 +52,7 @@ namespace API.Controllers
             {
                 return NotFound(new ApiResponse(404));
             }
-            
+
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }
 
