@@ -14,6 +14,7 @@ builder.Services.AddControllers();
 
 builder.Services.ApplicationServices(builder.Configuration);
 builder.Services.AppIdentityServices(builder.Configuration);
+builder.Services.AddSwaggerDocumentation();
 
 var app = builder.Build();
 
@@ -21,9 +22,7 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
-
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerDocumentation();
 
 app.UseStaticFiles();
 
