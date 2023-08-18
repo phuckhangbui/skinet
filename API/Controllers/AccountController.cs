@@ -42,7 +42,6 @@ public class AccountController: BaseApiController
         };
     }
 
-    [Authorize]
     [HttpGet("emailexists")]
     public async Task<ActionResult<bool>> CheckEmailExistAsync([FromQuery] string email)
     {
